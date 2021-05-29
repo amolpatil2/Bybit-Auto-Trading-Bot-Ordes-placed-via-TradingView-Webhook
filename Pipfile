@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 flask = ">1.1"
 ccxt = ">1.18"
+websocket = "*"
 
 [requires]
 python_version = "3.7"

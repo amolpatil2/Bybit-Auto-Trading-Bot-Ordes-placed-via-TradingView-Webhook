@@ -41,9 +41,10 @@ def webhook():
         
         # datas = parse_webhook(request.get_data(as_text=True))
         # print(datas)
-        datas = request.get_data(as_text=True)
+        datas = request.get_json()
         print(datas)
         # Check that the key is correct
+        print (get_token())
         if get_token() == datas['key']:
             print(' [Alert Received] ')
             print('POST Received/Updated Data:', datas)
@@ -57,7 +58,7 @@ def webhook():
         abort(400)
         
 if __name__ == '__main__' :
-  app.run()
+  app.run(debug=True)
 
 """
 if __name__ == '__main__':

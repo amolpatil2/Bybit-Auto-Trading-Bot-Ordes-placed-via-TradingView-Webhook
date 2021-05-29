@@ -12,8 +12,8 @@ def parse__price_webhook(price_webhook_data):
 
       
     # T03YZL3d27TpQRKAj0 # ntelfxFsJA4R8mVCbZN2UMPyAbwsEmb2c94m
-    bybit1 = Bybit(api_key='T03YZL3d27TpQRKAj0',
-                 secret='ntelfxFsJA4R8mVCbZN2UMPyAbwsEmb2c94m', symbol=data['symbol'], ws=True, test=True)
+    bybit1 = Bybit(api_key='nwWXWnaWsQxwypZGvA',
+                 secret='3HgtII6cQPRaouEdaX5bgxiGsA7EwXVGFC3R', symbol=data['symbol'], ws=True, test=True)
     #bybit1 = Bybit(api_key='JB76Njd3U64amNpkHF',
                  #secret='LblyOzDpw23uwxfKxPH5itad50MIsTlW6iyW', symbol=data['symbol'], ws=True, test=True)
 
@@ -80,8 +80,8 @@ def send_order(data):
     #bybit1 = Bybit(api_key='JB76Njd3U64amNpkHF',
                 #secret='LblyOzDpw23uwxfKxPH5itad50MIsTlW6iyW', symbol=data['symbol'], ws=True, test=True)
     #Client API Keys
-    bybit1 = Bybit(api_key='T03YZL3d27TpQRKAj0',
-                secret='ntelfxFsJA4R8mVCbZN2UMPyAbwsEmb2c94m', symbol=data['symbol'], ws=True, test=True)
+    bybit1 = Bybit(api_key='nwWXWnaWsQxwypZGvA',
+                secret='3HgtII6cQPRaouEdaX5bgxiGsA7EwXVGFC3R', symbol=data['symbol'], ws=True, test=True)
     
     # Send the order to the exchange, using the values from the tradingview alert.
     print('Sending:', data['symbol'], data['type'], data['side'], data['amount'])

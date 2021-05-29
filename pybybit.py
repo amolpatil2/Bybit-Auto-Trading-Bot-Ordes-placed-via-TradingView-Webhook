@@ -59,7 +59,8 @@ class Bybit():
         else:
             print('returned list is not None')
             for p in positions:
-                if p['symbol'] == self.symbol:
+                print(p)
+                if p['data']['symbol'] == self.symbol:
                     self.ws_data['position'].update(p)
                     break
 
@@ -162,8 +163,10 @@ class Bybit():
                 del payload[k]
 
         param_str = urllib.parse.urlencode(payload)
+        print(param_str)
         sign = hmac.new(self.secret.encode('utf-8'),
                         param_str.encode('utf-8'), hashlib.sha256).hexdigest()
+        print(sign)
         payload['sign'] = sign
 
         if method == 'GET':
