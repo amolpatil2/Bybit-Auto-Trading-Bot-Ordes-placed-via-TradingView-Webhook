@@ -206,7 +206,8 @@ class Bybit():
         'time_in_force': time_in_force,
         'take_profit': take_profit,
         'stop_loss': stop_loss,
-        'order_link_id': order_link_id
+        'order_link_id': order_link_id, 
+        'recv_window': 100000000000
         }
         #/open-api/order/create
         return self._request('POST', '/v2/private/order/create', payload=payload)
