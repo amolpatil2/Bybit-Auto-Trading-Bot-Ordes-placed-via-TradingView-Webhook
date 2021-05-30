@@ -869,8 +869,6 @@ def send_order(data):
         stoploss = last_price-(stopLossby100*last_price)
         print('Stop Loss Margin----------------------------------------------------------')
         print(stoploss)
-
-        bybit1.cancel_all_active_orders(symbol=data['symbol'])  
         
         print('Sending Order in ', data['side'],'position')
         if data['type'] == 'Limit':
@@ -883,6 +881,8 @@ def send_order(data):
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
         pos_take_profit = position_result[0]['data']['take_profit']
+        
+        bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
         data['type'] = 'Limit'
         data['side'] = 'Sell'
