@@ -871,7 +871,11 @@ def send_order(data):
         print(stoploss)
         
         print('Sending Order in ', data['side'],'position')
-        order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,
+        if data['type'] == 'Limit':
+            order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,
+        stop_loss=stoploss,time_in_force='PostOnly', reduce_only='False', price =last_executed_price)
+        else:
+            order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,
         stop_loss=stoploss,time_in_force='PostOnly', reduce_only='False')
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
