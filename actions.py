@@ -919,15 +919,16 @@ def send_order(data):
         
         data['side'] = 'Sell'
         print("None Sell order being executed")
-        print('Take Profit by 100 ----------------------------------------------------------')
-        tprofit = float(data['takeProfit'])
-        print(tprofit/100)
-        print('Multiply By Entry Price ----------------------------------------------------------')
-        takeProfitby100 = tprofit/100
-        print(takeProfitby100*last_price)
-        takeprofit = last_price - (takeProfitby100*last_price)
-        print('Take Profit Margin----------------------------------------------------------')
-        print(takeprofit)
+       
+        #print('Take Profit by 100 ----------------------------------------------------------')
+        #tprofit = float(data['takeProfit'])
+        #print(tprofit/100)
+        #print('Multiply By Entry Price ----------------------------------------------------------')
+        #takeProfitby100 = tprofit/100
+        #print(takeProfitby100*last_price)
+        #takeprofit = last_price - (takeProfitby100*last_price)
+      #  print('Take Profit Margin----------------------------------------------------------')
+        #print(takeprofit)
 
         print('Stop Loss by 100 ----------------------------------------------------------')
         sLoss = float(data['stopLoss'])
@@ -956,12 +957,12 @@ def send_order(data):
         position = bybit1.get_position_http()
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
-        tprofit = float(data['takeProfit'])
-        takeProfitby100 = tprofit/100
-        takeprofit = entry_price-(takeProfitby100*entry_price)
+        #tprofit = float(data['takeProfit'])
+        #takeProfitby100 = tprofit/100
+        #takeprofit = entry_price-(takeProfitby100*entry_price)
         position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
-        print('And ', takeprofit,'Take profit Value')
+        #print('And ', takeprofit,'Take profit Value')
         print('And ', entry_price,'Position Entry price Value')
         
         
