@@ -163,7 +163,7 @@ def send_order(data):
     global oldpricesell
 
 
-    if position_side == None and data['side']=='Buy' and data.get('trailingStop')==None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('trailingStop')==None:
 
 
         print('Stop Loss by 100 ----------------------------------------------------------')
@@ -225,7 +225,7 @@ def send_order(data):
 
         data['side']='Buy'
         
-    if position_side == None and data['side']=='Sell' and data.get('takeProfit')!=None and data['stopLoss']!=None and data.get('trailingStop')==None:  
+    if position_side == 'None' and data['side']=='Sell' and data.get('takeProfit')!=None and data['stopLoss']!=None and data.get('trailingStop')==None:  
         # if there is no order Position at All
         # and we have a new Sell Order
         print("None   Sell order being executed")
@@ -586,7 +586,7 @@ def send_order(data):
         
         #-----------------------------------------------------------------------------------------------------------------
         
-    if position_side == None and data['side']=='Buy' and data.get('takeProfit')==None and data['stopLoss']!=None and data.get('trailingStop')==None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('takeProfit')==None and data['stopLoss']!=None and data.get('trailingStop')==None:
         # if there is no order Position at All
         # and we have a new Buy Order
         print("None  Buy order being executed")
@@ -639,7 +639,7 @@ def send_order(data):
 
         data['side']='Buy'
         
-    if position_side == None and data['side']=='Sell' and data.get('takeProfit')==None and data['stopLoss']!=None and data.get('trailingStop')==None:  
+    if position_side == 'None' and data['side']=='Sell' and data.get('takeProfit')==None and data['stopLoss']!=None and data.get('trailingStop')==None:  
         # if there is no order Position at All
         # and we have a new Sell Order
         print("None   Sell order being executed")
@@ -984,7 +984,7 @@ def send_order(data):
         
         #-----------------------------------------------------------------------------------------------------------
 
-    if position_side == None and data['side']=='Buy' and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')==None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')==None:
         # if there is no order Position at All
         # and we have a new Buy Order
         print("None  Buy order being executed")
@@ -1039,7 +1039,7 @@ def send_order(data):
 
         data['side']='Buy'
         
-    if position_side == None and data['side']=='Sell' and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')==None:  
+    if position_side == 'None' and data['side']=='Sell' and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')==None:  
         # if there is no order Position at All
         # and we have a new Sell Order
         print("None   Sell order being executed")
@@ -1342,7 +1342,7 @@ def send_order(data):
         
         #---------------------------------------------------------------------------------------------------------------
         
-    if position_side == None and data['side']=='Buy' and data.get('takeProfit')==None and data['stopLoss']==None and data.get('trailingStop')==None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('takeProfit')==None and data['stopLoss']==None and data.get('trailingStop')==None:
         
 
         print('Sending Order in ', data['side'],'position')
@@ -1377,7 +1377,7 @@ def send_order(data):
 
         data['side']='Buy'
         
-    if position_side == None and data['stopLoss']==None and data.get('trailingStop')==None:  
+    if position_side == 'None' and data['stopLoss']==None and data.get('trailingStop')==None:  
 
 
         data['type'] = 'Limit'
@@ -1606,7 +1606,7 @@ def send_order(data):
         #---------------------------------------------------------------------------------------------------
         #----------Start of Code where Trailing Stop is Activated-----------------------------------------
     
-    if position_side == None and data['side']=='Buy' and data.get('takeProfit')!=None  and data['stopLoss']!=None and data.get('trailingStop')!=None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('takeProfit')!=None  and data['stopLoss']!=None and data.get('trailingStop')!=None:
         # if there is no order Position at All
         # and we have a new Buy Order
         print("None  Buy order being executed")
@@ -1684,7 +1684,7 @@ def send_order(data):
 
         data['side']='Buy'
         
-    if position_side == None and data['side']=='Sell' and data.get('takeProfit')!=None and data['stopLoss']!=None and data.get('trailingStop')!=None:  
+    if position_side == 'None' and data['side']=='Sell' and data.get('takeProfit')!=None and data['stopLoss']!=None and data.get('trailingStop')!=None:  
         # if there is no order Position at All
         # and we have a new Sell Order
         print("None   Sell order being executed")
@@ -2107,7 +2107,7 @@ def send_order(data):
         
         #-----------------------------------------------------------------------------------------------------------------
         
-    if position_side == None and data['side']=='Buy' and data.get('takeProfit')==None and data['stopLoss']!='0'and data.get('trailingStop')!=None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('takeProfit')==None and data['stopLoss']!='0'and data.get('trailingStop')!=None:
         # if there is no order Position at All
         # and we have a new Buy Order
         print("None  Buy order being executed")
@@ -2184,7 +2184,7 @@ def send_order(data):
 
         data['side']='Buy'
         
-    if position_side == None and data['stopLoss']!=None and data.get('trailingStop')!=None:  
+    if position_side == 'None' and data['stopLoss']!=None and data.get('trailingStop')!=None:  
         # if there is no order Position at All
         # and we have a new Sell Order
         print("None   Sell order being executed")
@@ -2608,7 +2608,7 @@ def send_order(data):
         
         #-----------------------------------------------------------------------------------------------------------
 
-    if position_side == None and data['side']=='Buy' and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')!=None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')!=None:
         # if there is no order Position at All
         # and we have a new Buy Order
         print("None  Buy order being executed")
@@ -2678,7 +2678,7 @@ def send_order(data):
 
         data['side']='Buy'
         
-    if position_side == None and data['side']=='Sell' and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')!=None:  
+    if position_side == 'None' and data['side']=='Sell' and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')!=None:  
         # if there is no order Position at All
         # and we have a new Sell Order
         print("None   Sell order being executed")
@@ -3036,7 +3036,7 @@ def send_order(data):
         
         #---------------------------------------------------------------------------------------------------------------
         
-    if position_side == None and data['side']=='Buy' and data.get('takeProfit')==None and data['stopLoss']==None and data.get('trailingStop')!=None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('takeProfit')==None and data['stopLoss']==None and data.get('trailingStop')!=None:
         
 
         print('Trailing Stop by 100 ----------------------------------------------------------')
@@ -3085,7 +3085,7 @@ def send_order(data):
 
         data['side']='Buy'
         
-    if position_side == None and data['side']=='Sell' and data.get('takeProfit')==None and data['stopLoss']==None and data.get('trailingStop')==None:  
+    if position_side == 'None' and data['side']=='Sell' and data.get('takeProfit')==None and data['stopLoss']==None and data.get('trailingStop')==None:  
       
 
         print('Trailing Stop by 100 ----------------------------------------------------------')
