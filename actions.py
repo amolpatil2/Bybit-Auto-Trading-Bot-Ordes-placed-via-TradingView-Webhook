@@ -841,7 +841,11 @@ def send_order(data):
         position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
+
+        if data['type'] == 'Limit':
+            order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='GoodTillCancel', reduce_only='False', price = last_executed_price)
+        else:
+            bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
 
         # and we have a new Buy Order
         print("Buy  Buy order being executed" )
