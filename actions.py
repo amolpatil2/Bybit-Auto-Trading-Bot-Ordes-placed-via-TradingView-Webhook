@@ -163,7 +163,7 @@ def send_order(data):
     global oldpricesell
 
 
-    if position_side == 'None' and data['side']=='Buy' and data.get('trailingStop')==None:
+    if position_side == 'None' and data['side']=='Buy' and data.get('trailingStop')!=None:
 
 
         print('Stop Loss by 100 ----------------------------------------------------------')
