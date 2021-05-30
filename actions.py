@@ -90,7 +90,7 @@ def send_order(data):
     print('Type:', data['type'])
     wallet_balance = bybit1.get_wallet_balance('BTC')
     print('Wallet Balance ----------------------------------------------------------')
-    #print(wallet_balance)
+    print(wallet_balance)
     print(wallet_balance['result']['BTC']['available_balance'])
     print('Place Order Amount')
     intamountpercentage  = float(data['amount'])/100
