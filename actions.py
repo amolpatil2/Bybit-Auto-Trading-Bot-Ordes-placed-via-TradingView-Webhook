@@ -134,6 +134,8 @@ def send_order(data):
     tick = tickers[0]
     print("Last Price", tick['last_price'])
     last_price = float(tick['bid_price'])
+    last_executed_price = float(tick['last_price'])
+
     #print("Bid Price Value Two", last_price)
 
     #The Position Entry Price Irrespective of where position or not
@@ -604,7 +606,10 @@ def send_order(data):
         print(stoploss)
 
         print('Sending Order in ', data['side'],'position')
-        order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,time_in_force='PostOnly', reduce_only='False')
+        if data['type'] == 'Limit':
+            order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,time_in_force='GoodTillCancel', reduce_only='False', price = last_executed_price)
+        else:
+            order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,time_in_force='PostOnly', reduce_only='False')
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
