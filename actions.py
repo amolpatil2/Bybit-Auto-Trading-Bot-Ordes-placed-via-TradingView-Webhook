@@ -98,27 +98,32 @@ def send_order(data):
     intwalletbalance = wallet_balance['result']['BTC']['available_balance']
     print('Wallet Balance', intwalletbalance)
 
-    leverage = bybit1.get_leverage()
+    leverage = data['leverage']
+    #bybit1.get_leverage()
     print('Leverage ----------------------------------------------------------')
-    print(json.dumps(leverage, indent=2))
-    leverages = leverage["result"][data['symbol']]['leverage']
-    print("Leverage Value", leverages)
+    #print(leverage)
+    #print(json.dumps(leverage, indent=2))
+    #leverages = leverage["result"][data['symbol']]['leverage']
+    #leverages = leverage
+    print("Leverage Value", leverage)
     
     time.sleep(5.0)
 
     position = bybit1.get_position_http()
+
     print('Position ----------------------------------------------------------')
+    print(position)
     position_result  = position['result']
     print('Position Result Value',position_result)
     json.dumps(position_result, indent=2)
-    print('Position Result', position_result[0]['side'])
-    position_side = position_result[0]['side']
-    position_take_profit = position_result[0]['take_profit']
+    print('Position Result', position_result[0]['data']['side'])
+    position_side = position_result[0]['data']['side']
+    position_take_profit = position_result[0]['data']['take_profit']
     print('Position Take Profit', position_take_profit)
-    position_stop_loss = position_result[0]['stop_loss']
+    position_stop_loss = position_result[0]['data']['stop_loss']
     print('Position Stop Loss', position_stop_loss)
     print('Order ID ----------------------------------------------------------')
-    order_idss = position_result[0]['id']
+    order_idss = position_result[0]['data']['id']
     print('Example Order ID',order_idss)
     #print(position['entry_price'])
 
@@ -132,8 +137,8 @@ def send_order(data):
     #print("Bid Price Value Two", last_price)
 
     #The Position Entry Price Irrespective of where position or not
-    print("Position Entry Price", position_result[0]['entry_price']) 
-    entry_price = float(position_result[0]['entry_price'])
+    print("Position Entry Price", position_result[0]['data']['entry_price']) 
+    entry_price = float(position_result[0]['data']['entry_price'])
     print("Bid Price Value Two", entry_price)
 
     orderamounts = intwalletbalance*last_price
@@ -158,7 +163,7 @@ def send_order(data):
     global oldpricesell
 
 
-    if position_side == 'None' and data['side']=='Buy' and data['trailingStop']=='None':
+    if position_side == 'None' and data['side']=='Buy' and data.get('trailingStop')=='None':
 
 
         print('Stop Loss by 100 ----------------------------------------------------------')
@@ -210,7 +215,7 @@ def send_order(data):
         p_r_qty = position_value, p_r_price = takeprofit)
         """
 
-        leverage = bybit1.get_leverage()
+        #leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -278,7 +283,7 @@ def send_order(data):
         # if there is no order Position at All
         
         data['side'] = 'Sell'
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -312,7 +317,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else 'None'
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -322,11 +327,11 @@ def send_order(data):
                 #We want to Add TP to the Market Order
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = (takeProfitby100*entry_price)+entry_price
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
         #order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'], 
@@ -353,7 +358,7 @@ def send_order(data):
     if position_side == 'Sell' and data['side']=='Sell'and data['takeProfit']!='None' and data['stopLoss']!='None' and data['trailingStop']=='None':  # if there is no order Position at All
         # and we have a new Sell Order
         data['side'] = 'Buy'
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -386,7 +391,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -396,11 +401,11 @@ def send_order(data):
         
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = entry_price-(takeProfitby100*entry_price)
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
         print('And ', takeprofit,'Take profit Value')
         print('And ', entry_price,'Position Entry price Value')
@@ -418,7 +423,8 @@ def send_order(data):
         order_resp = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_resp)
 
-        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
+        #leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -430,7 +436,7 @@ def send_order(data):
         
     if position_side == 'Sell' and data['side']=='Buy'and data['takeProfit']!='None' and data['stopLoss']!='None' and data['trailingStop']=='None': 
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -463,7 +469,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -473,11 +479,11 @@ def send_order(data):
                 #We want to Add TP to the Market Order
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = (takeProfitby100*entry_price)+entry_price
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
         #order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'], 
@@ -489,8 +495,8 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         nonebuy = order_resp['result']['order_id'] if order_resp['result'] else None
         
-
-        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -503,7 +509,7 @@ def send_order(data):
 
     if position_side == 'Buy' and data['side']=='Sell'and data['takeProfit']!='None' and data['stopLoss']!='None' and data['trailingStop']=='None':
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -536,7 +542,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -546,11 +552,11 @@ def send_order(data):
         
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = entry_price-(takeProfitby100*entry_price)
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
         print('And ', takeprofit,'Take profit Value')
         print('And ', entry_price,'Position Entry price Value')
@@ -567,8 +573,8 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_resp = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_resp)
-
-        leverage = bybit1.get_leverage()
+        leverage = 10
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -622,8 +628,8 @@ def send_order(data):
         order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'],
         p_r_qty = position_value, p_r_price = takeprofit)
         """
-
-        leverage = bybit1.get_leverage()
+        leverage = 10
+        #leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -668,8 +674,8 @@ def send_order(data):
         oldqtysell = orderamount
         oldpricesell = stoploss
         nonesell = nonesell
-
-        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -683,7 +689,7 @@ def send_order(data):
         # if there is no order Position at All
         
         data['side'] = 'Sell'
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -709,7 +715,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -719,11 +725,11 @@ def send_order(data):
                 #We want to Add TP to the Market Order
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = (takeProfitby100*entry_price)+entry_price
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
         #order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'], 
@@ -735,8 +741,8 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         nonebuy = order_resp['result']['order_id'] if order_resp['result'] else None
         
-
-        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -750,7 +756,7 @@ def send_order(data):
     if position_side == 'Sell' and data['side']=='Sell'and data['takeProfit']=='None' and data['stopLoss']!='None' and data['trailingStop']=='None':  # if there is no order Position at All
         # and we have a new Sell Order
         data['side'] = 'Buy'
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -783,7 +789,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -793,11 +799,11 @@ def send_order(data):
         
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = entry_price-(takeProfitby100*entry_price)
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
         print('And ', takeprofit,'Take profit Value')
         print('And ', entry_price,'Position Entry price Value')
@@ -814,8 +820,8 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_resp = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_resp)
-
-        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -827,7 +833,7 @@ def send_order(data):
         
     if position_side == 'Sell' and data['side']=='Buy'and data['takeProfit']=='None' and data['stopLoss']!='None' and data['trailingStop']=='None': 
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -860,7 +866,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -870,11 +876,11 @@ def send_order(data):
                 #We want to Add TP to the Market Order
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = (takeProfitby100*entry_price)+entry_price
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
         #order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'], 
@@ -887,7 +893,8 @@ def send_order(data):
         nonebuy = order_resp['result']['order_id'] if order_resp['result'] else None
         
 
-        leverage = bybit1.get_leverage()
+#        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -900,7 +907,7 @@ def send_order(data):
 
     if position_side == 'Buy' and data['side']=='Sell'and data['takeProfit']=='None' and data['stopLoss']!='None' and data['trailingStop']=='None':
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -933,7 +940,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -943,11 +950,11 @@ def send_order(data):
         
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = entry_price-(takeProfitby100*entry_price)
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
         print('And ', takeprofit,'Take profit Value')
         print('And ', entry_price,'Position Entry price Value')
@@ -964,8 +971,8 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_resp = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_resp)
-
-        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -1021,8 +1028,8 @@ def send_order(data):
         order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'],
         p_r_qty = position_value, p_r_price = takeprofit)
         """
-
-        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -1065,8 +1072,9 @@ def send_order(data):
         nonesell = order_resp['result']['order_id'] if order_resp['result'] else None
         oldqtysell = orderamount
         nonesell = nonesell
-
-        leverage = bybit1.get_leverage()
+        
+        leverage = data['leverage']
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -1080,7 +1088,7 @@ def send_order(data):
         # if there is no order Position at All
         
         data['side'] = 'Sell'
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -1092,7 +1100,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -1102,11 +1110,11 @@ def send_order(data):
                 #We want to Add TP to the Market Order
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = (takeProfitby100*entry_price)+entry_price
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
         #order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'], 
@@ -1137,7 +1145,7 @@ def send_order(data):
         # if there is no order Position at All
         # and we have a new Sell Order
         data['side'] = 'Buy'
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -1161,7 +1169,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -1171,11 +1179,11 @@ def send_order(data):
         
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = entry_price-(takeProfitby100*entry_price)
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
         print('And ', takeprofit,'Take profit Value')
         print('And ', entry_price,'Position Entry price Value')
@@ -1192,8 +1200,8 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_resp = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_resp)
-
-        leverage = bybit1.get_leverage()
+        leverage = data['leverage']
+#        leverage = bybit1.get_leverage()
         print('Leverage ----------------------------------------------------------')
         print(leverage)
         print("Change Leverage")
@@ -1205,7 +1213,7 @@ def send_order(data):
         
     if position_side == 'Sell' and data['side']=='Buy'and data['takeProfit']!='None' and data['stopLoss']=='None' and data['trailingStop']=='None': 
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -1228,7 +1236,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -1238,11 +1246,11 @@ def send_order(data):
                 #We want to Add TP to the Market Order
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = (takeProfitby100*entry_price)+entry_price
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
         #order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'], 
@@ -1268,7 +1276,7 @@ def send_order(data):
 
     if position_side == 'Buy' and data['side']=='Sell'and data['takeProfit']!='None' and data['stopLoss']=='None' and data['trailingStop']=='None':
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -1291,7 +1299,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -1300,11 +1308,11 @@ def send_order(data):
         
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
+        entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
         takeProfitby100 = tprofit/100
         takeprofit = entry_price-(takeProfitby100*entry_price)
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
         print('And ', takeprofit,'Take profit Value')
         print('And ', entry_price,'Position Entry price Value')
@@ -1396,7 +1404,7 @@ def send_order(data):
     if position_side == 'Buy'and data['side']=='Buy' and data['takeProfit']=='None' and data['stopLoss']=='None' and data['trailingStop']=='None':  # if there is no order Position at All
         
         data['side'] = 'Sell'
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -1410,7 +1418,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -1420,8 +1428,8 @@ def send_order(data):
                 #We want to Add TP to the Market Order
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
-        position_value = position_result[0]['size']
+        entry_price = position_result[0]['data']['entry_price']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
         #order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'], 
@@ -1449,7 +1457,7 @@ def send_order(data):
         # if there is no order Position at All
         # and we have a new Sell Order
         data['side'] = 'Buy'
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -1462,7 +1470,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -1472,8 +1480,8 @@ def send_order(data):
         
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
-        position_value = position_result[0]['size']
+        entry_price = position_result[0]['data']['entry_price']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
         print('And ', entry_price,'Position Entry price Value')
         
@@ -1502,7 +1510,7 @@ def send_order(data):
         
     if position_side == 'Sell' and data['side']=='Buy'and data['takeProfit']=='None' and data['stopLoss']=='None' and data['trailingStop']=='None': 
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -1514,7 +1522,7 @@ def send_order(data):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -3247,7 +3255,7 @@ def send_order(data):
         
     if position_side == 'Sell' and data['side']=='Buy'and data['takeProfit']=='None' and data['stopLoss']=='None' and data['trailingStop']!='None': 
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -3274,7 +3282,7 @@ def send_order(data):
         order_resp = bybit1.place_active_order_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -3284,8 +3292,8 @@ def send_order(data):
                 #We want to Add TP to the Market Order
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
-        position_value = position_result[0]['size']
+        entry_price = position_result[0]['data']['entry_price']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
         #order_resp = bybit1.replace_active_order(order_id = nonebuy, symbol = data['symbol'], 
@@ -3311,7 +3319,7 @@ def send_order(data):
 
     if position_side == 'Buy' and data['trailingStop']!='None':
         
-        position_value = position_result[0]['size']
+        position_value = position_result[0]['data']['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only='False')
@@ -3330,7 +3338,7 @@ def send_order(data):
         order_resp = bybit1.place_active_order_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        pos_take_profit = position_result[0]['data']['take_profit']
         
         bybit1.cancel_all_active_orders(symbol=data['symbol'])
         
@@ -3339,8 +3347,8 @@ def send_order(data):
         
         position = bybit1.get_position_http()
         position_result  = position['result']
-        entry_price = position_result[0]['entry_price']
-        position_value = position_result[0]['size']
+        entry_price = position_result[0]['data']['entry_price']
+        position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position and ',position_value,'Position Value')
         print('And ', entry_price,'Position Entry price Value')
 

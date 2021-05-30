@@ -306,7 +306,7 @@ class Bybit():
     def get_position_http(self):
 
         payload = {}
-        return self._request('GET', '/position/list', payload=payload)
+        return self._request('GET', '/v2/private/position/list', payload=payload)
 
     def change_position_margin(self, symbol=None, margin=None):
 
