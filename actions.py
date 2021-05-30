@@ -845,15 +845,16 @@ def send_order(data):
 
         # and we have a new Buy Order
         print("Buy  Buy order being executed" )
-        print('Take Profit by 100 ----------------------------------------------------------')
-        tprofit = float(data['takeProfit'])
-        print(tprofit/100)
-        print('Multiply By Entry Price ----------------------------------------------------------')
-        takeProfitby100 = tprofit/100
-        print(takeProfitby100*last_price)
-        takeprofit = (takeProfitby100*last_price)+last_price
-        print('Take Profit Margin----------------------------------------------------------')
-        print(takeprofit)
+        
+        #print('Take Profit by 100 ----------------------------------------------------------')
+        #tprofit = float(data['takeProfit'])
+        #print(tprofit/100)
+       # print('Multiply By Entry Price ----------------------------------------------------------')
+        #takeProfitby100 = tprofit/100
+        #print(takeProfitby100*last_price)
+        #takeprofit = (takeProfitby100*last_price)+last_price
+        #print('Take Profit Margin----------------------------------------------------------')
+        #print(takeprofit)
 
         print('Stop Loss by 100 ----------------------------------------------------------')
         sLoss = float(data['stopLoss'])
@@ -882,9 +883,9 @@ def send_order(data):
         position = bybit1.get_position_http()
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
-        tprofit = float(data['takeProfit'])
-        takeProfitby100 = tprofit/100
-        takeprofit = (takeProfitby100*entry_price)+entry_price
+        #tprofit = float(data['takeProfit'])
+        #takeProfitby100 = tprofit/100
+        #takeprofit = (takeProfitby100*entry_price)+entry_price
         position_value = position_result[0]['data']['size']
         print('Sending Order in ', data['side'],'position')
         #,p_r_qty = int(orderamount), p_r_price = int(entry_price)
