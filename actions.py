@@ -620,7 +620,7 @@ def send_order(data):
         #We want to Add TP to the Market Order
         print('Sending Order in ', data['side'],'position')
         order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'],
-        qty = orderamount, time_in_force='PostOnly', reduce_only='True')
+        qty = orderamount, time_in_force='PostOnly', reduce_only='True', stop_loss =stoploss)
         print(json.dumps(order_resp, indent=2))
         nonebuy = order_resp['result']['order_id'] if order_resp['result'] else None
         oldqty = orderamount
