@@ -606,16 +606,16 @@ def send_order(data):
         print(stoploss)
 
         print('Sending Order in ', data['side'],'position')
-        if data['type'] == 'Limit':
-            order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,time_in_force='GoodTillCancel', reduce_only='False', price = last_executed_price)
-        else:
-            order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,time_in_force='PostOnly', reduce_only='False')
+        #if data['type'] == 'Limit':
+        #    order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,time_in_force='PostOnly', reduce_only='False', price = last_executed_price)
+        #else:
+        order_resp = bybit1.place_active_order(side=data['side'], order_type=data['type'], qty=orderamount,time_in_force='PostOnly', reduce_only='False')
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
  
 		
-        data['type'] = 'Limit'
+        data['type'] = 'Market'
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
         print('Sending Order in ', data['side'],'position')
