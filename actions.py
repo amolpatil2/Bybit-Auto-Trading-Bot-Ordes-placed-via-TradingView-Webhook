@@ -75,13 +75,15 @@ def parse_webhook(webhook_data):
         #json.dump(datasa,data)
     return datasa
 
-def send_order(data):
+def send_order(data, client_api_key, client_secret):
     #data['side'] = 'Sell'
     #bybit1 = Bybit(api_key='JB76Njd3U64amNpkHF',
                 #secret='LblyOzDpw23uwxfKxPH5itad50MIsTlW6iyW', symbol=data['symbol'], ws=True, test=True)
     #Client API Keys
-    bybit1 = Bybit(api_key='xn2qRgd5wFkhi8mwxt',
-                secret='oRt4IwxkKutDLlpc5x2xwEvOaJpHdEpmChM2', symbol=data['symbol'], ws=True, test=True)
+    #api_key='xn2qRgd5wFkhi8mwxt',
+    #            secret='oRt4IwxkKutDLlpc5x2xwEvOaJpHdEpmChM2'
+    bybit1 = Bybit(api_key=client_api_key,
+                secret=client_secret, symbol=data['symbol'], ws=True, test=True)
     
     # Send the order to the exchange, using the values from the tradingview alert.
     print('Sending:', data['symbol'], data['type'], data['side'], data['amount'])

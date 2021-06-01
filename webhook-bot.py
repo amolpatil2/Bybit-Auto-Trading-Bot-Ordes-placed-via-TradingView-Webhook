@@ -15,6 +15,8 @@ import threading, time
 
 # Create Flask object called app.
 app = Flask(__name__)
+api_key=''
+api_secret=''
 
 
 # Create root to easily let us know its on/working.
@@ -48,7 +50,7 @@ def webhook():
         if get_token() == datas['key']:
             print(' [Alert Received] ')
             print('POST Received/Updated Data:', datas)
-            send_order(datas)
+            send_order(datas, api_key, api_secret)
             return '', 200
         else:
             logger.error("Incoming Signal From Unauthorized User.")
@@ -58,7 +60,11 @@ def webhook():
         abort(400)
         
 if __name__ == '__main__' :
-  app.run( host="0.0.0.0", debug=True)
+    api_key =sys.argv[0]
+    api_secret =sys.argv[1]
+    print(api_key)
+    print(api_secret)
+    app.run( host="0.0.0.0", debug=True)
 
 """
 if __name__ == '__main__':
