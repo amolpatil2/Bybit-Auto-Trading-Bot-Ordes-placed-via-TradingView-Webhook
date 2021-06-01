@@ -60,8 +60,8 @@ def webhook():
         abort(400)
         
 if __name__ == '__main__' :
-    api_key =sys.argv[0]
-    api_secret =sys.argv[1]
+    api_key =sys.argv[1]
+    api_secret =sys.argv[2]
     print(api_key)
     print(api_secret)
     app.run( host="0.0.0.0", debug=True)
