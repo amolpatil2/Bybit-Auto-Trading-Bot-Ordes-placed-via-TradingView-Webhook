@@ -70,6 +70,11 @@ def shutdown_server():
 def shutdown():
     shutdown_server()
     return 'Server shutting down...'
+
+@app.route('/isalive', methods=['GET'])
+def isalive():
+    print('i am alive')
+    return '',200
         
 if __name__ == '__main__' :
     api_key =sys.argv[1]
