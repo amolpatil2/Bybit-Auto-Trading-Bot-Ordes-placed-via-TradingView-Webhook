@@ -275,7 +275,7 @@ def send_order(data, client_api_key, client_secret):
     if position_side == 'None' and data['side']=='Buy' and data.get('takeProfit')!=None and data['stopLoss']!=None and data.get('trailingStop')==None:  
         # if there is no order Position at All
         # and we have a new Sell Order
-        bybit1.cancel_all_active_orders(symbol=data['symbol'])
+        #bybit1.cancel_all_active_orders(symbol=data['symbol'])
         print("None   Buy order being executed")
         print('Take Profit by 100 ----------------------------------------------------------')
         tprofit = float(data['takeProfit'])
