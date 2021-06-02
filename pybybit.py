@@ -29,7 +29,7 @@ class Bybit():
 
         self.url = self.url_main if not test else self.url_test
         self.ws_url = self.ws_url_main if not test else self.ws_url_test
-
+        print (self.url)
         self.ws = ws
         if ws:
             self._connect()

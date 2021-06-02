@@ -17,6 +17,7 @@ import threading, time
 app = Flask(__name__)
 api_key=''
 api_secret=''
+is_test='test'
 
 
 # Create root to easily let us know its on/working.
@@ -47,10 +48,14 @@ def webhook():
         print(datas)
         # Check that the key is correct
         print (get_token())
+        if is_test == 'test':
+            testApi = True
+        else:
+            testApi = False
         if get_token() == datas['key']:
             print(' [Alert Received] ')
             print('POST Received/Updated Data:', datas)
-            send_order(datas, api_key, api_secret)
+            send_order(datas, api_key, api_secret, testApi)
             return '', 200
         else:
             logger.error("Incoming Signal From Unauthorized User.")
@@ -79,8 +84,10 @@ def isalive():
 if __name__ == '__main__' :
     api_key =sys.argv[1]
     api_secret =sys.argv[2]
+    is_test=sys.argv[3]
     print(api_key)
     print(api_secret)
+    print(is_test)
     app.run( host="0.0.0.0", debug=True)
 
 """

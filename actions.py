@@ -8,12 +8,12 @@ import ast
 import bybit
 
 
-def parse__price_webhook(price_webhook_data):
+def parse__price_webhook(price_webhook_data, is_test):
 
       
     # T03YZL3d27TpQRKAj0 # ntelfxFsJA4R8mVCbZN2UMPyAbwsEmb2c94m
     bybit1 = Bybit(api_key='xn2qRgd5wFkhi8mwxt',
-                 secret='oRt4IwxkKutDLlpc5x2xwEvOaJpHdEpmChM2', symbol=data['symbol'], ws=True, test=True)
+                 secret='oRt4IwxkKutDLlpc5x2xwEvOaJpHdEpmChM2', symbol=data['symbol'], ws=True, test=is_test)
     #bybit1 = Bybit(api_key='JB76Njd3U64amNpkHF',
                  #secret='LblyOzDpw23uwxfKxPH5itad50MIsTlW6iyW', symbol=data['symbol'], ws=True, test=True)
 
@@ -75,7 +75,7 @@ def parse_webhook(webhook_data):
         #json.dump(datasa,data)
     return datasa
 
-def send_order(data, client_api_key, client_secret):
+def send_order(data, client_api_key, client_secret, is_test=True):
     #data['side'] = 'Sell'
     #bybit1 = Bybit(api_key='JB76Njd3U64amNpkHF',
                 #secret='LblyOzDpw23uwxfKxPH5itad50MIsTlW6iyW', symbol=data['symbol'], ws=True, test=True)
@@ -83,7 +83,7 @@ def send_order(data, client_api_key, client_secret):
     #api_key='xn2qRgd5wFkhi8mwxt',
     #            secret='oRt4IwxkKutDLlpc5x2xwEvOaJpHdEpmChM2'
     bybit1 = Bybit(api_key=client_api_key,
-                secret=client_secret, symbol=data['symbol'], ws=True, test=True)
+                secret=client_secret, symbol=data['symbol'], ws=True, test=is_test)
     
     # Send the order to the exchange, using the values from the tradingview alert.
     print('Sending:', data['symbol'], data['type'], data['side'], data['amount'])
