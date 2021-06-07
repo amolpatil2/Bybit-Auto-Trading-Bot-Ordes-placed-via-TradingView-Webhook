@@ -90,14 +90,14 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     print('Trading Amount:', data['amount'])
     print('Side:', data['side'])
     print('Type:', data['type'])
-    wallet_balance = bybit1.get_wallet_balance('BTC')
+    wallet_balance = bybit1.get_wallet_balance('USDT')
     print('Wallet Balance ----------------------------------------------------------')
     print(wallet_balance)
-    print(wallet_balance['result']['BTC']['available_balance'])
+    print(wallet_balance['result']['USDT']['available_balance'])
     print('Place Order Amount')
     intamountpercentage  = float(data['amount'])/100
     print('Int Amount Percentage', intamountpercentage)
-    intwalletbalance = wallet_balance['result']['BTC']['available_balance']
+    intwalletbalance = wallet_balance['result']['USDT']['available_balance']
     print('Wallet Balance', intwalletbalance)
 
     leverage = data['leverage']
