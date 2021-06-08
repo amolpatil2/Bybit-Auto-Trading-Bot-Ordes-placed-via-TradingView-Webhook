@@ -145,7 +145,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     entry_price = float(position_result[0]['data']['entry_price'])
     print("Bid Price Value Two", entry_price)
 
-    orderamounts = intwalletbalance*last_price
+    orderamounts = intwalletbalance
     print("Order Amount", orderamounts)
     orderamount  = orderamounts*intamountpercentage
     print('Order Amount in USD', orderamount)
