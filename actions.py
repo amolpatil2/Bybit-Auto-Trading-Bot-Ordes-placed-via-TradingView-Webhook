@@ -145,13 +145,11 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     entry_price = float(position_result[0]['data']['entry_price'])
     print("Bid Price Value Two", entry_price)
 
-    orderamounts = intwalletbalance
-    print("Order Amount", orderamounts)
-    orderamount  = orderamounts*intamountpercentage/last_price
-
-    print('Order Amount in USD', orderamounts)
-
-    print('Order Amount in BTC', orderamount)
+    #orderamounts = intwalletbalance*last_price
+    orderamounts = intwalletbalance # IN usd
+    print("Total Order Amount available", orderamounts)
+    orderamount  = orderamounts*intamountpercentage
+    print('Order Amount in USD', orderamount)
 
     #Get Active Order Real Time
     real_time_active_order = bybit1.get_active_order(data['symbol'])
