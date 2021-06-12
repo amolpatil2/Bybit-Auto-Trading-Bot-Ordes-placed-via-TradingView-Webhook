@@ -164,7 +164,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     if position_result[0]['size'] == '0' and position_result[1]['size'] == '0':
         print ("no position set")
         position_side = 'None'
-    else if position_side[0]['size'] == '0':
+    elif position_side[0]['size'] == '0':
         print ("position side is sell")
         position_side = "Sell"
     else:
