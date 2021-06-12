@@ -161,10 +161,10 @@ def send_order(data, client_api_key, client_secret, is_test=True):
 
     save_leverage = bybit1.change_leverage_perpetual(data['symbol'], data['leverage'])
     print("Position side", position_side)
-    if position_result[0]['size'] == '0' and position_result[1]['size'] == '0':
+    if position_result[0]['size'] == 0 and position_result[1]['size'] == 0:
         print ("no position set")
         position_side = 'None'
-    elif position_result[0]['size'] == '0':
+    elif position_result[0]['size'] == 0:
         print ("position side is sell")
         position_side = "Sell"
     else:
