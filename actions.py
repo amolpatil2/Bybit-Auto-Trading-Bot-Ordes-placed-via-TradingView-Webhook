@@ -390,7 +390,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=True)
         
         data['side'] = 'Sell'
         print("None Sell order being executed")
@@ -546,7 +546,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
 
         #if data['type'] == 'Limit':
         #order_resp = bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='GoodTillCancel', reduce_only=False, price = last_executed_price)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=True)
 
         # and we have a new Buy Order
         print("Buy  Buy order being executed" )
@@ -601,7 +601,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=True)
         
         data['side'] = 'Sell'
         print("None Sell order being executed")
@@ -731,7 +731,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=True)
 
         # and we have a new Buy Order
         print("Buy  Buy order being executed" )
@@ -773,7 +773,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=True)
         
         data['side'] = 'Sell'
         print("None Sell order being executed")
@@ -837,7 +837,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=True)
 
         
         print('Sending Order in ', data['side'],'position')
@@ -867,7 +867,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=True)
         
         data['side'] = 'Sell'
         
@@ -1049,7 +1049,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=True)
         
         data['side'] = 'Buy'
         # and we have a new Buy Order
@@ -1140,7 +1140,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=True)
         
         data['side'] = 'Sell'
         print("None Sell order being executed")
@@ -1232,7 +1232,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=True)
 
         # and we have a new Buy Order
         print("Buy  Buy order being executed" )
@@ -1320,7 +1320,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=True)
 
         print('Stop Loss by 100 ----------------------------------------------------------')
         sLoss = float(data['stopLoss'])
@@ -1510,7 +1510,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
 
         print('Sending Order in ', data['side'],'position')
         order_resp = bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=orderamount,
-        time_in_force='PostOnly', reduce_only=False)
+        time_in_force='PostOnly', reduce_only=True)
         print(json.dumps(order_resp, indent=2))
         order_idss = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_idss)
@@ -1549,7 +1549,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[0]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=True)
         
         data['side'] = 'Buy'
         # and we have a new Buy Order
@@ -1721,7 +1721,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=True)
 
         # and we have a new Buy Order
         print("Buy  Buy order being executed" )
