@@ -221,12 +221,11 @@ class Bybit():
         stop_loss=None, reduce_only=None, order_link_id=None):
 
         payload = {
-        'close_on_trigger': False,
+        'close_on_trigger': 'false',
         'order_link_id': order_link_id,
         'order_type': order_type,
         'price': price,
         'qty': qty,
-        'reduce_only': reduce_only if reduce_only else False,
         'side': side,
         'stop_loss': stop_loss,
         'symbol': symbol if symbol else self.symbol,
