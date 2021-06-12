@@ -157,6 +157,7 @@ class Bybit():
     def _request(self, method, path, payload):
         payload['api_key'] = self.api_key
         payload['timestamp'] = int(time.time() * 1000)
+        payload['recv_window'] = 10000000
         payload = dict(sorted(payload.items()))
         for k, v in list(payload.items()):
             if v is None:
@@ -176,6 +177,7 @@ class Bybit():
             query = None
             body = json.dumps(payload)
 
+        print("body: ", body)
         req = Request(method, self.url + path, data=body, params=query)
         prepped = self.s.prepare_request(req)
 
