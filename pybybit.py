@@ -161,7 +161,7 @@ class Bybit():
         payload = dict(sorted(payload.items()))
         newpayload = dict(sorted(payload.items()))
         for k, v in list(newpayload.items()):
-            if v is None
+            if v is None:
                 del newpayload[k]
                 continue
             newpayload[k] = str(v).lower() if type(v) is bool else v
