@@ -218,9 +218,10 @@ class Bybit():
     def place_active_order_perpetual(self, side=None, symbol=None, order_type=None,
         qty=None, price=None,
         time_in_force='GoodTillCancel', take_profit=None,
-        stop_loss=None, reduce_only=None, order_link_id=None):
+        stop_loss=None, reduce_only=None, order_link_id=None, close_on_trigger= None):
 
         payload = {
+        'close_on_trigger': close_on_trigger
         'order_link_id': order_link_id,
         'order_type': order_type,
         'price': price,
