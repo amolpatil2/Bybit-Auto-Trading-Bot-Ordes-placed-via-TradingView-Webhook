@@ -211,6 +211,28 @@ class Bybit():
         }
         #/open-api/order/create
         return self._request('POST', '/v2/private/order/create', payload=payload)
+
+
+    def place_active_order_perpetual(self, side=None, symbol=None, order_type=None,
+        qty=None, price=None,
+        time_in_force='GoodTillCancel', take_profit=None,
+        stop_loss=None, reduce_only=None, order_link_id=None):
+
+        payload = {
+        'side': side,
+        'symbol': symbol if symbol else self.symbol,
+        'order_type': order_type,
+        'qty': qty,
+        'price': price,
+        'time_in_force': time_in_force,
+        'take_profit': take_profit,
+        'stop_loss': stop_loss,
+        'order_link_id': order_link_id, 
+        'recv_window': 100000000000
+        }
+        #/open-api/order/create
+        return self._request('POST', '/private/linear/order/create', payload=payload)
+        
     
     def place_active_order_ts(self, symbol=None, take_profit=None,
                            stop_loss=None, trailing_stop=None, new_trailing_active=None):
@@ -240,6 +262,22 @@ class Bybit():
             'order_status': order_status
         }
         return self._request('GET', '/open-api/order/list', payload=payload)
+
+    def get_active_order_perpetual(self, order_id=None, order_link_id=None, symbol=None,
+                     sort=None, order=None, page=None, limit=None,
+                     order_status=None):
+
+        payload = {
+            'order_id': order_id,
+            'order_link_id': order_link_id,
+            'symbol': symbol if symbol else self.symbol,
+            'sort': sort,
+            'order': order,
+            'page': page,
+            'limit': limit,
+            'order_status': order_status
+        }
+        return self._request('GET', '/private/linear/order/list', payload=payload)
 
     def cancel_active_order(self, order_id=None):
 
@@ -304,10 +342,24 @@ class Bybit():
         }
         return self._request('POST', '/user/leverage/save', payload=payload)
 
+    def change_leverage_perpetual(self, symbol=None, leverage=None):
+
+        payload = {
+            'symbol': symbol if symbol else self.symbol,
+            'buy_leverage': leverage,
+            'sell_leverage': leverage
+        }
+        return self._request('POST', '/private/linear/position/set-leverage', payload=payload)
+
     def get_position_http(self):
 
         payload = {}
         return self._request('GET', '/v2/private/position/list', payload=payload)
+
+    def get_position_http_perpetual(self):
+        
+        payload = {}
+        return self._request('GET', '/private/linear/position/list', payload=payload)        
 
     def change_position_margin(self, symbol=None, margin=None):
 
@@ -393,6 +445,13 @@ class Bybit():
             'symbol': symbol if symbol else self.symbol
         }
         return self._request('POST', '/v2/private/order/cancelAll', payload=payload)
+    
+    def cancel_all_active_orders_perpetual(self, symbol=None):
+
+        payload = {
+            'symbol': symbol if symbol else self.symbol
+        }
+        return self._request('POST', '/private/linear/order/cancel-all', payload=payload)
 
     def cancel_all_conditional_orders(self, symbol=None):
 
