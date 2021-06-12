@@ -159,12 +159,13 @@ class Bybit():
         payload['timestamp'] = int(time.time() * 1000)
         payload['recv_window'] = 10000000
         payload = dict(sorted(payload.items()))
-        for k, v in list(payload.items()):
-            payload[k] = str(v).lower() if type(v) is bool else v
+        newpayload = payload
+        for k, v in list(newpayload.items()):
+            newpayload[k] = str(v).lower() if type(v) is bool else v
             if v is None:
-                del payload[k]
+                del newpayload[k]
 
-        param_str = urllib.parse.urlencode(payload)
+        param_str = urllib.parse.urlencode(newpayload)
 
         print(param_str)
         sign = hmac.new(self.secret.encode('utf-8'),
