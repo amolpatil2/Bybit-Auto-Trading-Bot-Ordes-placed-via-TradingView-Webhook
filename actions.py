@@ -120,13 +120,13 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     json.dumps(position_result, indent=2)
     print('Position Result', position_result[0]['side'])
     position_side = position_result[0]['side']
-    position_take_profit = position_result[0]['take_profit']
-    print('Position Take Profit', position_take_profit)
-    position_stop_loss = position_result[0]['stop_loss']
-    print('Position Stop Loss', position_stop_loss)
-    print('Order ID ----------------------------------------------------------')
-    order_idss = position_result[0]['id']
-    print('Example Order ID',order_idss)
+    #position_take_profit = position_result[0]['take_profit']
+    #print('Position Take Profit', position_take_profit)
+    #position_stop_loss = position_result[0]['stop_loss']
+    #print('Position Stop Loss', position_stop_loss)
+   # print('Order ID ----------------------------------------------------------')
+   # order_idss = position_result[0]['id']
+    #print('Example Order ID',order_idss)
     #print(position['entry_price'])
 
     ticker = bybit1.get_tickers(data['symbol'])
@@ -352,7 +352,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         #bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -404,7 +404,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         #bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -565,7 +565,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         #bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
 #        leverage = bybit1.get_leverage()
@@ -616,7 +616,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         #bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -735,7 +735,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         #bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -777,7 +777,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         #bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
 
@@ -830,7 +830,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         #bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -861,7 +861,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         print(json.dumps(order_resp, indent=2))
         order_ids = order_resp['result']['order_id'] if order_resp['result'] else None
         print(order_ids)
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         #bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -1079,7 +1079,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -1169,7 +1169,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -1261,7 +1261,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -1337,7 +1337,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -1579,7 +1579,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -1658,7 +1658,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -1750,7 +1750,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -1838,7 +1838,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -2046,7 +2046,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -2129,7 +2129,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -2189,7 +2189,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -2267,7 +2267,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -2438,7 +2438,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -2556,7 +2556,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
@@ -2612,7 +2612,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         order_resp = bybit1.place_active_order_perpetual_ts(symbol=data['symbol'], trailing_stop = tstoploss)
         print(json.dumps(order_resp, indent=2))
         
-        pos_take_profit = position_result[0]['take_profit']
+        #pos_take_profit = position_result[0]['take_profit']
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
         
