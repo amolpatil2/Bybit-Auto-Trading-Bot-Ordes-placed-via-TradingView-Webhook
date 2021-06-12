@@ -148,8 +148,8 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     #orderamounts = intwalletbalance*last_price
     orderamounts = intwalletbalance # IN usd
     print("Total Order Amount available", orderamounts)
-    orderamount  = orderamounts*intamountpercentage
-    print('Order Amount in USD', orderamount)
+    orderamount  = (orderamounts*intamountpercentage * leverage)/entry_price
+    print('Order Amount in BTC', orderamount)
 
     #Get Active Order Real Time
     real_time_active_order = bybit1.get_active_order_perpetual(data['symbol'])
