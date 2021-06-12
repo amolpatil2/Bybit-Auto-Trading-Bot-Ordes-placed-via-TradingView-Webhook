@@ -148,6 +148,10 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     #orderamounts = intwalletbalance*last_price
     orderamounts = intwalletbalance # IN usd
     print("Total Order Amount available", orderamounts)
+    temp = orderamounts*intamountpercentage
+    print("temp Order Amount available", temp)
+    temp2 = temp * float(leverage)
+    print("temp2 Order Amount available", temp2)
     orderamount  = orderamounts*intamountpercentage*float(leverage)/entry_price
     print('Order Amount in BTC', orderamount)
 
