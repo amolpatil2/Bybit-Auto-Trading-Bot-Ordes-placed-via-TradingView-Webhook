@@ -160,6 +160,9 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     print('Real time active order result Intented Results',real_time_active_order_result)
 
     save_leverage = bybit1.change_leverage_perpetual(data['symbol'], data['leverage'])
+    print("Position side", position_side)
+    print("data side", data['side'])
+    print("data", data)
 
 
     global nonebuy
