@@ -226,7 +226,8 @@ class Bybit():
         stop_loss=None, reduce_only=None, order_link_id=None, close_on_trigger= None):
 
         payload = {
-        'close_on_trigger': close_on_trigger,
+        'close_on_trigger': close_on_trigger if close_on_trigger else False,
+        'reduce_only': reduce_only if reduce_only else False,
         'order_link_id': order_link_id,
         'order_type': order_type,
         'price': price,
