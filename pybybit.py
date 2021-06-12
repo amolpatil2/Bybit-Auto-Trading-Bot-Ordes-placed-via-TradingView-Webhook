@@ -356,9 +356,11 @@ class Bybit():
         payload = {}
         return self._request('GET', '/v2/private/position/list', payload=payload)
 
-    def get_position_http_perpetual(self):
+    def get_position_http_perpetual(self, symbol=None):
         
-        payload = {}
+        payload = {
+            'symbol': symbol if symbol else self.symbol
+        }
         return self._request('GET', '/private/linear/position/list', payload=payload)        
 
     def change_position_margin(self, symbol=None, margin=None):

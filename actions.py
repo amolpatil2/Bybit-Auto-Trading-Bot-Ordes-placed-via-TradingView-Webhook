@@ -20,7 +20,7 @@ def parse__price_webhook(price_webhook_data, is_test):
     bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
     bybit1.cancel_all_conditional_orders(symbol=data['symbol'])
     
-    position = bybit1.get_position_http_perpetual()
+    position = bybit1.get_position_http_perpetual(data['symbol'])
     position_result  = position['result']
     json.dumps(position_result, indent=2)
     
@@ -111,7 +111,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     
     time.sleep(5.0)
 
-    position = bybit1.get_position_http_perpetual()
+    position = bybit1.get_position_http_perpetual(data['symbol'])
 
     print('Position ----------------------------------------------------------')
     print(position)
@@ -1087,7 +1087,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
                 #We want to Add TP to the Market Order
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -1177,7 +1177,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['type'] = 'Limit'
         data['side'] = 'Buy'
         
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -1269,7 +1269,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
                 #We want to Add TP to the Market Order
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -1345,7 +1345,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['type'] = 'Limit'
         data['side'] = 'Buy'
         
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -1587,7 +1587,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
                 #We want to Add TP to the Market Order
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -1666,7 +1666,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['type'] = 'Limit'
         data['side'] = 'Buy'
         
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -1758,7 +1758,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
                 #We want to Add TP to the Market Order
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -1846,7 +1846,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['type'] = 'Limit'
         data['side'] = 'Buy'
         
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -2054,7 +2054,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
                 #We want to Add TP to the Market Order
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -2137,7 +2137,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['type'] = 'Limit'
         data['side'] = 'Buy'
         
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -2197,7 +2197,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
                 #We want to Add TP to the Market Order
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -2274,7 +2274,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['type'] = 'Limit'
         data['side'] = 'Buy'
         
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         tprofit = float(data['takeProfit'])
@@ -2446,7 +2446,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
                 #We want to Add TP to the Market Order
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         position_value = position_result[0]['data']['size']
@@ -2497,7 +2497,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['type'] = 'Limit'
         data['side'] = 'Buy'
         
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         position_value = position_result[0]['data']['size']
@@ -2564,7 +2564,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['side'] = 'Sell'
         #We want to Add TP to the Market Order
                 #We want to Add TP to the Market Order
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         position_value = position_result[0]['data']['size']
@@ -2619,7 +2619,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         data['type'] = 'Limit'
         data['side'] = 'Buy'
         
-        position = bybit1.get_position_http_perpetual()
+        position = bybit1.get_position_http_perpetual(data['symbol'])
         position_result  = position['result']
         entry_price = position_result[0]['data']['entry_price']
         position_value = position_result[0]['data']['size']
