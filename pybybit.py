@@ -220,7 +220,7 @@ class Bybit():
 
         payload = {
         'close_on_trigger': False,
-        'order_link_id': order_link_id
+        'order_link_id': order_link_id,
         'order_type': order_type,
         'price': price,
         'qty': qty,
@@ -228,8 +228,8 @@ class Bybit():
         'side': side,
         'stop_loss': stop_loss,
         'symbol': symbol if symbol else self.symbol,
-        'take_profit': take_profit
-        'time_in_force': time_in_force,
+        'take_profit': take_profit,
+        'time_in_force': time_in_force
         }
         #/open-api/order/create
         return self._request('POST', '/private/linear/order/create', payload=payload)
