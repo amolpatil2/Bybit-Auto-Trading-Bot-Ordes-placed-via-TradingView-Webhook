@@ -219,18 +219,17 @@ class Bybit():
         stop_loss=None, reduce_only=None, order_link_id=None):
 
         payload = {
-        'side': side,
-        'symbol': symbol if symbol else self.symbol,
-        'order_type': order_type,
-        'qty': qty,
-        'price': price,
-        'time_in_force': time_in_force,
-        'take_profit': take_profit,
-        'stop_loss': stop_loss,
-        'order_link_id': order_link_id, 
         'close_on_trigger': False,
+        'order_link_id': order_link_id
+        'order_type': order_type,
+        'price': price,
+        'qty': qty,
         'reduce_only': reduce_only if reduce_only else False,
-        'recv_window': 100000000000
+        'side': side,
+        'stop_loss': stop_loss,
+        'symbol': symbol if symbol else self.symbol,
+        'take_profit': take_profit
+        'time_in_force': time_in_force,
         }
         #/open-api/order/create
         return self._request('POST', '/private/linear/order/create', payload=payload)
