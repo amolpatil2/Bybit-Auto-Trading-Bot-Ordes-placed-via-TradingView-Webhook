@@ -228,6 +228,7 @@ class Bybit():
         'take_profit': take_profit,
         'stop_loss': stop_loss,
         'order_link_id': order_link_id, 
+        'close_on_trigger': True
         'recv_window': 100000000000
         }
         #/open-api/order/create
