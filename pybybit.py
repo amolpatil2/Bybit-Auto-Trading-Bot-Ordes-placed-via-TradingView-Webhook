@@ -161,12 +161,13 @@ class Bybit():
         payload = dict(sorted(payload.items()))
         newpayload = dict(sorted(payload.items()))
         for k, v in list(newpayload.items()):
-            newpayload[k] = str(v).lower() if type(v) is bool else v
-            if v is None:
+            if v is None
                 del newpayload[k]
+                continue
+            newpayload[k] = str(v).lower() if type(v) is bool else v
 
         param_str = urllib.parse.urlencode(newpayload)
-
+ 
         print(param_str)
         sign = hmac.new(self.secret.encode('utf-8'),
                         param_str.encode('utf-8'), hashlib.sha256).hexdigest()
