@@ -118,7 +118,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     position_result  = position['result']
     print('Position Result Value',position_result)
     json.dumps(position_result, indent=2)
-    print('Position Result', position_result[0]['data']['side'])
+    print('Position Result', position_result[0]['side'])
     position_side = position_result[0]['data']['side']
     position_take_profit = position_result[0]['data']['take_profit']
     print('Position Take Profit', position_take_profit)
