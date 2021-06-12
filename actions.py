@@ -335,10 +335,10 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     if position_side == 'Sell' and data['side']=='Buy'and data.get('takeProfit')!=None and data['stopLoss']!=None and data.get('trailingStop')==None: 
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
-        position_value = position_result[0]['size']
+        position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
-        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
+        bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=True)
 
         # and we have a new Buy Order
         print("Buy  Buy order being executed" )
@@ -540,7 +540,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         
     if position_side == 'Sell' and data['side']=='Buy'and data.get('takeProfit')==None and data['stopLoss']!=None and data.get('trailingStop')==None: 
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
-        position_value = position_result[0]['size']
+        position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
 
@@ -728,7 +728,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     if position_side == 'Sell' and data['side']=='Buy'and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')==None: 
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])
-        position_value = position_result[0]['size']
+        position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
@@ -834,7 +834,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     if position_side == 'Sell' and data['side']=='Buy'and data.get('takeProfit')==None and data['stopLoss']==None and data.get('trailingStop')==None: 
         
         bybit1.cancel_all_active_orders_perpetual(symbol=data['symbol'])    
-        position_value = position_result[0]['size']
+        position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order_perpetual(side=data['side'], order_type='Market', qty=position_value,time_in_force='PostOnly', reduce_only=False)
@@ -1718,7 +1718,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         
     if position_side == 'Sell' and data['side']=='Buy'and data.get('takeProfit')==None and data['stopLoss']!=None and data.get('trailingStop')!=None: 
         
-        position_value = position_result[0]['size']
+        position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
@@ -2189,7 +2189,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         
     if position_side == 'Sell' and data['side']=='Buy'and data.get('takeProfit')!=None and data['stopLoss']==None and data.get('trailingStop')!=None: 
         
-        position_value = position_result[0]['size']
+        position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
@@ -2545,7 +2545,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
         
     if position_side == 'Sell' and data['side']=='Buy'and data.get('takeProfit')==None and data['stopLoss']==None and data.get('trailingStop')!=None: 
         
-        position_value = position_result[0]['size']
+        position_value = position_result[1]['size']
         position_valueS = position_value*entry_price
         print('position Value in USD', position_valueS)
         bybit1.place_active_order_perpetual(side=data['side'], order_type=data['type'], qty=position_value,time_in_force='PostOnly', reduce_only=False)
