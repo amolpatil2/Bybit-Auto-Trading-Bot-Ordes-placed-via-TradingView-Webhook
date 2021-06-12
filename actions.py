@@ -152,7 +152,7 @@ def send_order(data, client_api_key, client_secret, is_test=True):
     print("temp Order Amount available", temp)
     temp2 = temp * float(leverage)
     print("temp2 Order Amount available", temp2)
-    orderamount  = orderamounts*intamountpercentage*float(leverage)/entry_price
+    orderamount  = temp2/entry_price
     print('Order Amount in BTC', orderamount)
 
     #Get Active Order Real Time
